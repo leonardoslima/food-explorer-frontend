@@ -7,9 +7,17 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
-  body{
+  body {
     background-color: ${({ theme }) => theme.COLORS.DARK[400]};
     color: ${({ theme }) => theme.COLORS.LIGHT[100]};
+
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  body, input, button, textarea {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    outline: none;
   }
 
   a {
