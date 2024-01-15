@@ -22,6 +22,7 @@ export function SignIn() {
         />
 
         <Button title={"Entrar"} />
+        <a href="#">Criar uma conta</a>
       </Form>
     </Container>
   )

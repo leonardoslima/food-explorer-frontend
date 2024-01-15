@@ -17,7 +17,7 @@ export const Container = styled.div`
     gap: 0.625rem;
 
     margin-bottom: 4.5rem;
-  }
+  }  
 `;
 
 export const Form = styled.form`
@@ -28,4 +28,9 @@ export const Form = styled.form`
   width: 100%;
   flex-direction: column;
   gap: 2rem;
+
+  > a {
+    color: ${({ theme }) => theme.COLORS.LIGHT[100]};
+    margin: 0 auto;
+  }
 `;
