@@ -15,6 +15,8 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     gap: 0.625rem;
+
+    margin-bottom: 4.5rem;
   }
 `;
 

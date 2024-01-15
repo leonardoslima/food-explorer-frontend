@@ -1,3 +1,4 @@
+import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
 import { Container, Form } from "./styles"
 
@@ -19,6 +20,8 @@ export function SignIn() {
           name={"Senha"}
           placeholder="No mínimo 6 caracteres"
         />
+
+        <Button title={"Entrar"} />
       </Form>
     </Container>
   )
