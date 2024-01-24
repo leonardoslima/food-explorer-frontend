@@ -23,7 +23,7 @@ export function SignIn() {
         />
 
         <Button title={"Entrar"} />
-        <LinkText name={"Criar uma conta"} />
+        <LinkText to="/register" name={"Criar uma conta"} />
       </Form>
     </Container>
   )
