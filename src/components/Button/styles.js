@@ -25,7 +25,4 @@ export const Container = styled.button`
     filter: none;
     cursor: wait;
   }
-  > svg {
-    font-size: 2.4rem;
-  }
 `;
