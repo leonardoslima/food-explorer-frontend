@@ -1,5 +1,6 @@
 import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
+import { LinkText } from "../../components/LinkText"
 import { Container, Form } from "./styles"
 
 export function SignOut() {
@@ -26,7 +27,7 @@ export function SignOut() {
         />
 
         <Button title={"Criar conta"} />
-        <a href="#">Já tenho uma conta</a>
+        <LinkText name={"Já tenho uma conta"} />
       </Form>
     </Container>
   )

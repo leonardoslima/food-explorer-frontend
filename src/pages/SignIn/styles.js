@@ -28,9 +28,4 @@ export const Form = styled.form`
   width: 100%;
   flex-direction: column;
   gap: 2rem;
-
-  > a {
-    color: ${({ theme }) => theme.COLORS.LIGHT[100]};
-    margin: 0 auto;
-  }
 `;
