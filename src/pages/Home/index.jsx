@@ -1,3 +1,4 @@
+import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 
 export function Home() {
@@ -7,6 +8,7 @@ export function Home() {
       <div>
         <h2>Home</h2>
       </div>
+      <Footer />
     </>
   )
 }
