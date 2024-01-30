@@ -1,5 +1,5 @@
 import { BackButton, Container, Content } from './styles';
-import { CaretLeft, Receipt } from '@phosphor-icons/react';
+import { CaretLeft } from '@phosphor-icons/react';
 
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
@@ -11,7 +11,7 @@ import { Ingredient } from '../../components/Ingredient';
 import ravanello300 from '../../assets/ravanello-300.png';
 import ravanello400 from '../../assets/ravanello-400.png';
 
-export function Dish() {
+export function Dish({ isAdmin = false }) {
   return (
     <Container>
       <Header />
@@ -48,8 +48,10 @@ export function Dish() {
             </ul>
 
             <div>
-              <Counter quantity="05" />
-              <Button title="incluir ∙ R$ 25,00" />
+              {!isAdmin && <Counter quantity="05" />}
+              <Button
+                title={isAdmin ? 'Editar prato' : 'Incluir ∙ R$ 25,00'}
+              />
             </div>
           </div>
         </Content>
