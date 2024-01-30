@@ -8,6 +8,8 @@ export default createGlobalStyle`
   }
 
   body {
+    min-height: 100vh;
+    
     background-color: ${({ theme }) => theme.COLORS.DARK[400]};
     color: ${({ theme }) => theme.COLORS.LIGHT[100]};
 

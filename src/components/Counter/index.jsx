@@ -7,12 +7,12 @@ export function Counter({ quantity }) {
   return (
     <Container>
       <button>
-        <Minus size={28} />
+        <Minus size={24} />
       </button>
       {quantity}
 
       <button>
-        <Plus size={28} />
+        <Plus size={24} />
       </button>
     </Container>
   );
