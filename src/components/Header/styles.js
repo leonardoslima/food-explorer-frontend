@@ -65,7 +65,7 @@ export const Container = styled.header`
 
     //Mobile devices
     @media (max-width: 1024px) {
-      padding: 5.6rem 0 2.4rem;     
+      padding: 3.5rem 1.75rem 1.5rem 1.75rem;    
 
       button {
         background-color: transparent;

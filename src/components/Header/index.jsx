@@ -5,11 +5,11 @@ import { Button } from '../Button'
 import { Input } from '../Input'
 
 
-export function Header({ $isAdmin = false }) {
+export function Header({ onOpenMenu, $isAdmin = false }) {
   return (
     <Container isAdmin={$isAdmin}>
       <div>
-        <button>
+        <button onClick={onOpenMenu}>
           <List size={28} />
         </button>
 

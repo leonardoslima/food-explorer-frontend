@@ -5,7 +5,7 @@ export const Container = styled.div`
 
   display: grid;
   grid-template-rows: auto auto 1fr auto; 
-  grid-template-areas:
+  grid-template-areas:    
     'header'
     'back'
     'main'
@@ -13,17 +13,12 @@ export const Container = styled.div`
 
   gap: 1rem;
 
-  > header {
-    position: sticky;
-    top: 0;
-  } 
-
   > main {
     grid-area: main;
     height: 100%;
     width: min(75%, 1122px);
     margin: 0 auto;
-  } 
+  }
 `;
 
 export const BackButton = styled.div`

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { BackButton, Container, Content } from './styles';
 import { CaretLeft } from '@phosphor-icons/react';
 
@@ -6,15 +8,23 @@ import { Footer } from '../../components/Footer';
 import { Button } from '../../components/Button';
 import { Counter } from '../../components/Counter';
 import { LinkText } from '../../components/LinkText';
+import { MenuMobile } from '../../components/MenuMobile';
 import { Ingredient } from '../../components/Ingredient';
 
 import ravanello300 from '../../assets/ravanello-300.png';
 import ravanello400 from '../../assets/ravanello-400.png';
 
 export function Dish({ isAdmin = false }) {
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+
   return (
     <Container>
-      <Header />
+      <MenuMobile
+        menuIsOpen={menuIsOpen}
+        onCloseMenu={() => setMenuIsOpen(false)}
+      />
+
+      <Header onOpenMenu={() => setMenuIsOpen(true)} />
 
       <BackButton>
         <LinkText name="voltar" icon={<CaretLeft size={32} />} />
