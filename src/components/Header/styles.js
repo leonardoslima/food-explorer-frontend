@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.header`
+  grid-area: header;
+
   background-color: ${({ theme }) => theme.COLORS.DARK[700]};
   color: ${({ theme }) => theme.COLORS.LIGHT[100]};
   

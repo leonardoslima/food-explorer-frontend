@@ -3,8 +3,14 @@ import styled from "styled-components";
 export const Container = styled.div`
   height: 100vh;
 
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto; 
+  grid-template-areas:
+    'header'
+    'back'
+    'main'
+    'footer';
+
   gap: 1rem;
 
   > header {
@@ -13,6 +19,8 @@ export const Container = styled.div`
   } 
 
   > main {
+    grid-area: main;
+    height: 100%;
     width: min(75%, 1122px);
     margin: 0 auto;
   } 
