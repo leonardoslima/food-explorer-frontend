@@ -59,9 +59,9 @@ export const Form = styled.form`
   }
 
   .threeColumns{
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+    display: grid;
+    grid-template-rows: repeat(1fr, 3);
+    grid-gap: 2rem;
 
     div {
       display: flex;
@@ -144,8 +144,9 @@ export const Form = styled.form`
   }
 
   .twoColumns {
-    display: flex;
-    gap: 2rem;
+    display: grid;
+    grid-template-rows: repeat(1fr, 2);    
+    grid-gap: 2rem;
 
     > div:first-child {
       display: flex;
@@ -180,10 +181,20 @@ export const Form = styled.form`
       display: flex;
       flex-direction: column;
       gap: 1rem;
-  } 
+  }
 
-  > #buttonAdd {
-    background-color: ${({ theme }) => theme.COLORS.TINTS.TOMATO_400};
+  @media (min-width: 1025px) {
+    .threeColumns{
+      display: grid;
+      grid-template-columns: 2fr 3fr 2fr;
+      grid-gap: 2rem;
+    }
+
+    .twoColumns {
+      display: grid;
+      grid-template-columns: 3fr 1fr;    
+      grid-gap: 2rem;
+    }
   }
 `;
 

@@ -46,7 +46,7 @@ export function NewDish({ isAdmin = false }) {
               </div>
             </div>
 
-            <Input id="name" label="Nome" placeholder="Salada Ceasar" />
+            <Input id="name" name="Nome" placeholder="Salada Ceasar" />
 
             <div>
               <label htmlFor="category">Categoria</label>
@@ -85,7 +85,7 @@ export function NewDish({ isAdmin = false }) {
             />
           </div>
 
-          <Button type="button" id="buttonAdd" title="Salvar alterações" />
+          <Button type="button" title="Salvar alterações" />
 
         </Form>
       </main>
