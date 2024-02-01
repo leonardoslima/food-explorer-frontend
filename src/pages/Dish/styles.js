@@ -93,7 +93,7 @@ export const Content = styled.div`
   @media (min-width: 1025px) {
 
     flex-direction: row;
-    gap: clamp(2rem, -1.571rem + 5.571vw, 4rem);
+    gap: 2.875rem;
 
     > div {
       width: fit-content;
@@ -114,7 +114,7 @@ export const Content = styled.div`
       > ul {
         display: flex;
         flex-wrap: wrap;
-        gap: 1.25rem;
+        gap: 0.75rem;
 
         > li {
           margin-bottom: 0;

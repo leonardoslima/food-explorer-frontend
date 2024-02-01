@@ -2,7 +2,7 @@ import { Plus, X } from '@phosphor-icons/react';
 
 import { Container } from './styles';
 
-export function AddIngredients({ isNew = true, ...rest }) {
+export function AddIngredients({ isNew = false, ...rest }) {
   return (
     <Container isNew={isNew}>
       <input
