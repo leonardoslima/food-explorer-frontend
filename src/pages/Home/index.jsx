@@ -2,10 +2,11 @@ import { useState } from "react";
 
 import { Container } from "./styles";
 
+import { Card } from "../../components/Card";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
+import { Section } from "../../components/Section";
 import { MenuMobile } from "../../components/MenuMobile";
-import { Card } from "../../components/Card";
 
 import imageDish from '../../assets/ravanello-300.png';
 import foots200 from '../../assets/foots-200.svg';
@@ -34,16 +35,48 @@ export function Home() {
             <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
           </div>
         </div>
-        <Card
-          dish={{
-            image: imageDish,
-            name: "Torradas de Parma",
-            description: "Presunto de parma e rúcula em um pão com fermentação natural.",
-            price: "25,97"
-          }}
-        />
+
+        <Section
+          title="Refeições"
+          cards={[
+            <Card
+              key={1}
+              dish={{
+                image: imageDish,
+                name: "Torradas de Parma",
+                description: "Presunto de parma e rúcula em um pão com fermentação natural.",
+                price: "25,97"
+              }}
+            />,
+            <Card
+              key={2}
+              dish={{
+                image: imageDish,
+                name: "Torradas de Parma",
+                description: "Presunto de parma e rúcula em um pão com fermentação natural.",
+                price: "25,97"
+              }}
+            />
+          ]}
+        ></Section>
+
+        <Section
+          title="Sobremesas"
+          cards={[
+            <Card
+              key={1}
+              dish={{
+                image: imageDish,
+                name: "Torradas de Parma",
+                description: "Presunto de parma e rúcula em um pão com fermentação natural.",
+                price: "25,97"
+              }}
+            />,
+          ]}
+        ></Section>
+
       </main>
       <Footer />
-    </Container>
+    </Container >
   )
 }

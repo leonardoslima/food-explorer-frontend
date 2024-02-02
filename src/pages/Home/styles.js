@@ -8,15 +8,19 @@ export const Container = styled.div`
     'header'
     'main'
     'footer';
-
   
   grid-template-rows: auto 1fr auto;
 
   > main {
     grid-area: main;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
     width: min(89%, 1122px);
     margin: 0 auto;
-    padding: 2.75rem 0 1.625rem;
+    padding: 2.75rem 0 1.625rem;    
 
     > div:first-child {
       background: ${({ theme }) => theme.COLORS.GRADIENTS[200]};
@@ -61,7 +65,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 399px) {
+  @media (max-width: 425px) {
     > main > div:first-child {
       justify-content: center;
       align-items: center;
@@ -70,7 +74,7 @@ export const Container = styled.div`
         display: none;
       }
       > div {
-        padding-top: 0;
+        padding: 1rem;
       }
     }
   }
