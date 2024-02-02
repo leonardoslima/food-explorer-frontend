@@ -1,14 +1,34 @@
-import { AddIngredients } from "../../components/AddIngredients";
-import { Footer } from "../../components/Footer";
+import { useState } from "react";
+
 import { Header } from "../../components/Header";
+import { Footer } from "../../components/Footer";
+import { MenuMobile } from "../../components/MenuMobile";
+import { Card } from "../../components/Card";
+
+import imageDish from '../../assets/ravanello-300.png';
 
 export function Home() {
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+
   return (
     <>
-      <Header />
+      <MenuMobile
+        menuIsOpen={menuIsOpen}
+        onCloseMenu={() => setMenuIsOpen(false)}
+      />
+
+      <Header onOpenMenu={() => setMenuIsOpen(true)} />
       <div>
         <h2>Home</h2>
-        <AddIngredients />
+
+        <Card
+          dish={{
+            image: imageDish,
+            name: "Torradas de Parma",
+            description: "Presunto de parma e rúcula em um pão com fermentação natural.",
+            price: "25,97"
+          }}
+        />
       </div>
       <Footer />
     </>
