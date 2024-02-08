@@ -20,6 +20,23 @@ export const Container = styled.section`
     width: fit-content;    
   }
 
+  .swiper-button-prev {
+    width: 7.25rem;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0, 10, 15, 0.272541) 0%, #000a0f 100%);
+    left: -5px;
+    top: 1.375rem;
+  }
+
+  .swiper-button-next {
+    width: 7.25rem;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0, 10, 15, 0.272541) 0%, #000a0f 100%);
+    right: 0;
+    top: 1.375rem;
+    padding-right: 0.5rem;
+  }
+
   @media (max-width: 768px) {
     .swiper-button-prev,
     .swiper-button-next {
