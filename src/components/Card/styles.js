@@ -45,25 +45,34 @@ export const Container = styled.div`
     }
   }
 
-  > img {
-    width: 5.5rem;
-    height: 5.5rem;
-    border-radius: 50%;
-  }
+  > a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 
-  > p {
-    display: none;
-  }
+    > img {
+      width: 5.5rem;
+      height: 5.5rem;
+      border-radius: 50%;
+    }
 
-  > span {
+    > p {
+      display: none;
+    }
+
+    > span {
     color: ${({ theme }) => theme.COLORS.TINTS.CAKE_200};
-  }
+    }
 
-  > h3 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 1.4rem;
-  }
+    > h3 {
+      color: ${({ theme }) => theme.COLORS.LIGHT[300]};
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+  } 
 
   > div {
     width: 100%;
@@ -88,27 +97,29 @@ export const Container = styled.div`
     height: 28.875rem;
     gap: 1rem;
 
-    > img {
-      width: 11rem;
-      height: 11rem;
-    }
+    > a {
+      > img {
+        width: 11rem;
+        height: 11rem;
+      }
 
-    > h3 {
-      font-weight: 700;
-      font-size: 1.5rem;
-      width: 256px;
-    }
+      > h3 {
+        font-weight: 700;
+        font-size: 1.5rem;
+        width: 256px;
+      }
 
-    > p {
-      display: block;
-      color: ${({ theme }) => theme.COLORS.LIGHT[400]};
-      font-size: 0.875rem;
-      line-height: 2.2rem;
-    }
+      > p {
+        display: block;
+        color: ${({ theme }) => theme.COLORS.LIGHT[400]};
+        font-size: 0.875rem;
+        line-height: 2.2rem;
+      }
 
-    > span {
-      font-size: 2rem;
-    }
+        > span {
+        font-size: 2rem;
+      }
+    }    
 
     > div {
       display: grid;

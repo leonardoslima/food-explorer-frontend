@@ -13,8 +13,9 @@ import { Ingredient } from '../../components/Ingredient';
 
 import ravanello300 from '../../assets/ravanello-300.png';
 import ravanello400 from '../../assets/ravanello-400.png';
+import { Link } from 'react-router-dom';
 
-export function Dish({ isAdmin = false }) {
+export function Dish({ $isAdmin = false }) {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   return (
@@ -27,7 +28,7 @@ export function Dish({ isAdmin = false }) {
       <Header onOpenMenu={() => setMenuIsOpen(true)} />
 
       <BackButton>
-        <LinkText name="voltar" icon={<CaretLeft size={32} />} />
+        <LinkText name="voltar" icon={<CaretLeft size={32} />} to={-1} />
       </BackButton>
 
       <main>
@@ -58,10 +59,12 @@ export function Dish({ isAdmin = false }) {
             </ul>
 
             <div>
-              {!isAdmin && <Counter quantity="05" />}
-              <Button
-                title={isAdmin ? 'Editar prato' : 'Incluir ∙ R$ 25,00'}
-              />
+              {!$isAdmin && <Counter quantity="05" />}
+              <Link to={$isAdmin ? `/dishEdit/1` : ''}>
+                <Button
+                  title={$isAdmin ? 'Editar prato' : 'Incluir ∙ R$ 25,00'}
+                />
+              </Link>
             </div>
           </div>
         </Content>

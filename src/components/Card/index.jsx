@@ -1,4 +1,5 @@
 import { Heart, PencilSimple } from '@phosphor-icons/react';
+import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 
@@ -10,20 +11,26 @@ export function Card({ dish, isAdmin = false, favorite = false }) {
     <Container>
       {isAdmin ? (
         <button>
-          <PencilSimple size={32} />
+          <Link to={"/dishEdit/1"} >
+            <PencilSimple size={32} />
+          </Link>
         </button>
       ) : (
         <button>
           <Heart className={favorite ? 'fav' : ''} />
         </button>
       )}
-      <img src={dish.image} alt={dish.name} />
-      <h3>{dish.name} &gt;</h3>
-      <p>{dish.description}</p>
-      <span>R$ {dish.price}</span>
+
+      <Link to={"/dish/1"} >
+        <img src={dish.image} alt={dish.name} />
+        <h3>{dish.name} &gt;</h3>
+        <p>{dish.description}</p>
+        <span>R$ {dish.price}</span>
+      </Link>
+      
       {!isAdmin && (
         <div>
-          <Counter quantity={2}/>
+          <Counter quantity={2} />
           <Button title="incluir" />
         </div>
       )}

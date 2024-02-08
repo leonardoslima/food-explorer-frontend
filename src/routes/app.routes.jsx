@@ -9,9 +9,9 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/Dish" element={<Dish />} />
-      <Route path="/NewDish" element={<NewDish />} />
-      <Route path="/DishEdit" element={<DishEdit />} />
+      <Route path="/dish/:id" element={<Dish />} />
+      <Route path="/newDish" element={<NewDish />} />
+      <Route path="/dishEdit/:id" element={<DishEdit />} />
     </Routes>
   )
 }

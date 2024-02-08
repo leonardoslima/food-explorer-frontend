@@ -24,7 +24,7 @@ export function NewDish({ isAdmin = false }) {
       <Header onOpenMenu={() => setMenuIsOpen(true)} />
 
       <BackButton>
-        <LinkText name="voltar" icon={<CaretLeft size={32} />} />
+        <LinkText name="voltar" icon={<CaretLeft size={32} />} to={-1} />
       </BackButton>
 
       <main>

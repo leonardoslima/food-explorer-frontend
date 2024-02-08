@@ -15,23 +15,32 @@ export const Container = styled.header`
     align-items: center;
     gap: 2rem;
 
-    h1 {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 700;
+    a {
+        h1 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        font-size: 1.313rem;
+        color: ${({ theme }) => theme.COLORS.LIGHT[100]};
 
-      > span {
-        color: ${({ theme }) => theme.COLORS.TINTS.CAKE_200};
-        font-size: 1.2rem;
-        font-weight: 400;
+        > span {
+          color: ${({ theme }) => theme.COLORS.TINTS.CAKE_200};
+          font-size: 1.2rem;
+          font-weight: 400;
+        }
+
+        > svg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
       }
-    }
+    }   
     
     @media (min-width: 1025px) {
       padding-block: 2.4rem;
       
-      button:first-child {
+      #button-menu {
         display: none;
       }
 
@@ -53,12 +62,12 @@ export const Container = styled.header`
         }
       }
 
-      button {
+      > button {
         max-width: 216px;
         flex: 1;        
       }
 
-      button:last-child{
+      > button:last-child{
         display: none;
       }
     }
@@ -80,15 +89,15 @@ export const Container = styled.header`
           color: ${({ theme }) => theme.COLORS.LIGHT[100]};
           background-color: ${({ theme }) => theme.COLORS.TINTS.TOMATO_200};
           font-family: 'Poppins', sans-serif;
-          font-size: 1.4rem;
+          font-size: 0.875rem;
           font-weight: 500;
           line-height: 0;
-          width: 2rem;
-          height: 2rem;
+          width: 1.25rem;
+          height: 1.25rem;
           border-radius: 50%;
           position: absolute;
-          top: -1rem;
-          right: -1rem;
+          top: -0.5rem;
+          right: -0.5rem;
           display: grid;
           place-content: center;
         }
