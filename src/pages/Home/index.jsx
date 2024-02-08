@@ -56,6 +56,33 @@ export function Home() {
                 description: "Presunto de parma e rúcula em um pão com fermentação natural.",
                 price: "25,97"
               }}
+            />,
+            <Card
+              key={2}
+              dish={{
+                image: imageDish,
+                name: "Torradas de Parma",
+                description: "Presunto de parma e rúcula em um pão com fermentação natural.",
+                price: "25,97"
+              }}
+            />,
+            <Card
+              key={2}
+              dish={{
+                image: imageDish,
+                name: "Torradas de Parma",
+                description: "Presunto de parma e rúcula em um pão com fermentação natural.",
+                price: "25,97"
+              }}
+            />,
+            <Card
+              key={2}
+              dish={{
+                image: imageDish,
+                name: "Torradas de Parma",
+                description: "Presunto de parma e rúcula em um pão com fermentação natural.",
+                price: "25,97"
+              }}
             />
           ]}
         ></Section>
