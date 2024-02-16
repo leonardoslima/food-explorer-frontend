@@ -5,7 +5,7 @@ import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
 import { LinkText } from "../../components/LinkText"
 
-import { api } from "../../../services/api"
+import { api } from "../../services/api"
 
 import { Container, Form } from "./styles"
 

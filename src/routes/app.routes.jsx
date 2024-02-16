@@ -5,7 +5,7 @@ import { Dish } from "../pages/Dish";
 import { NewDish } from "../pages/NewDish";
 import { DishEdit } from "../pages/DishEdit";
 
-export function App() {
+export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
