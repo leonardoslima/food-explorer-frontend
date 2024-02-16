@@ -35,12 +35,11 @@ export const Container = styled.div`
       color: ${({ theme }) => theme.COLORS.LIGHT[300]};
 
       &.fav > path {
-        fill: ${({ theme }) => theme.COLORS.LIGHT[300]};
+        fill: ${({ theme }) => theme.COLORS.TINTS.TOMATO_100};
       }
 
       &:hover > path {
         fill: ${({ theme }) => theme.COLORS.LIGHT[300]};
-
       }
     }
   }

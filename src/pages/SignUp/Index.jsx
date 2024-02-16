@@ -1,9 +1,42 @@
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
 import { LinkText } from "../../components/LinkText"
+
+import { api } from "../../../services/api"
+
 import { Container, Form } from "./styles"
 
 export function SignUp() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  function handleSignUp() {
+    event.preventDefault();
+
+    if (!name || !email || !password) {
+      return alert("Preencha todos os campos!")
+    }
+
+    api.post("/users", { name, email, password })
+      .then(() => {
+        alert("Usuário cadastrado com sucesso!")
+        navigate("/")
+      })
+      .catch(error => {
+        if (error.response) {
+          alert(error.response.data.message);
+        } else {
+          alert("Não foi possível cadastrar!")
+        }
+      });
+  }
+
   return (
     <Container>
       <h1>
@@ -14,19 +47,25 @@ export function SignUp() {
       </h1>
       <Form>
         <Input
-          name={"Seu nome"}
+          name="Seu nome"
+          type="text"
           placeholder="Exemplo: Maria da Silva"
+          onChange={e => setName(e.target.value)}
         />
         <Input
-          name={"Email"}
+          name="Email"
+          type="text"
           placeholder="Exemplo: exemplo@exemplo.com.br"
+          onChange={e => setEmail(e.target.value)}
         />
         <Input
-          name={"Senha"}
+          name="Senha"
+          type="password"
           placeholder="No mínimo 6 caracteres"
+          onChange={e => setPassword(e.target.value)}
         />
 
-        <Button title={"Criar conta"} />
+        <Button title="Criar conta" onClick={handleSignUp} />
         <LinkText to="/" name={"Já tenho uma conta"} />
       </Form>
     </Container>
