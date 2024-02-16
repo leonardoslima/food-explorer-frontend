@@ -17,7 +17,21 @@ export const Container = styled.div`
     gap: 0.625rem;
 
     margin-bottom: 4.5rem;
-  }  
+  }
+  
+  @media (min-width: 1025px) {
+    max-width: 1440px;
+    
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+
+    > h1 {
+      margin: 0;
+      font-size: 2.625rem;
+      width: 50%;
+    }
+  }
 `;
 
 export const Form = styled.form`
@@ -28,4 +42,11 @@ export const Form = styled.form`
   width: 100%;
   flex-direction: column;
   gap: 2rem;
+
+  @media (min-width: 1025px) {
+    flex-direction: column;
+    max-width: 476px;
+    background-color: ${({ theme }) => theme.COLORS.DARK[700]};
+    padding: 4rem;
+  }
 `;
