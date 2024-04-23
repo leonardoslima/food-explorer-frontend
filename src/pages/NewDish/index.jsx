@@ -11,8 +11,21 @@ import { MenuMobile } from '../../components/MenuMobile';
 import { AddIngredients } from '../../components/AddIngredients';
 import { Button } from '../../components/Button';
 
-export function NewDish({ isAdmin = false }) {
+export function NewDish() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+
+  const [tags, setTags] = useState([]);
+  const [newTag, setNewTag] = useState("");
+
+  function handleAddTag() {
+    setTags(prevState => [...prevState, newTag])
+
+    setNewTag("");
+  }
+
+  function handleRemoveTag(deleted) {
+    setTags(prevState => prevState.filter(tag => tag !== deleted))
+  }
 
   return (
     <Container>
@@ -60,11 +73,24 @@ export function NewDish({ isAdmin = false }) {
 
           <div className="twoColumns">
             <div>
-              <label htmlFor="add">Ingredientes</label>
+              <label>Ingredientes</label>
               <div>
-                <AddIngredients value="Pão Naan" size="6" />
-                <AddIngredients value="Feijão" size="4" />
-                <AddIngredients id="add" isNew size="6" />
+                {
+                  tags.map((tag, index) => (
+                    <AddIngredients
+                      key={String(index)}
+                      value={tag}
+                      onClick={() => handleRemoveTag(tag)}
+                    />
+                  ))
+                }
+
+                <AddIngredients
+                  isNew
+                  onChange={e => setNewTag(e.target.value)}
+                  value={newTag}
+                  onClick={handleAddTag}
+                />
               </div>
             </div>
 

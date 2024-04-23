@@ -2,7 +2,7 @@ import { Plus, X } from '@phosphor-icons/react';
 
 import { Container } from './styles';
 
-export function AddIngredients({ isNew = false, ...rest }) {
+export function AddIngredients({ isNew = false, onClick, ...rest }) {
   return (
     <Container isNew={isNew}>
       <input
@@ -11,7 +11,10 @@ export function AddIngredients({ isNew = false, ...rest }) {
         placeholder="Adicionar"
         {...rest}
       />
-      <button type="button">
+      <button
+        type="button"
+        onClick={onClick}
+      >
         {isNew ? <Plus /> : <X />}
       </button>
     </Container>
