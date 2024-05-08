@@ -4,15 +4,23 @@ import { BackButton, Container, Form, Textarea } from './styles';
 import { CaretLeft, UploadSimple } from '@phosphor-icons/react';
 
 import { Input } from '../../components/Input';
-import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
+import { Button } from '../../components/Button';
+import { Header } from '../../components/Header';
 import { LinkText } from '../../components/LinkText';
 import { MenuMobile } from '../../components/MenuMobile';
 import { AddIngredients } from '../../components/AddIngredients';
-import { Button } from '../../components/Button';
+
+import { useNavigate } from 'react-router-dom';
+
+import { api } from '../../services/api';
 
 export function NewDish() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState("");
@@ -25,6 +33,64 @@ export function NewDish() {
 
   function handleRemoveTag(deleted) {
     setTags(prevState => prevState.filter(tag => tag !== deleted))
+  }
+
+  const [image, setImage] = useState(null);
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+
+  async function handleNewDish() {
+    if (!image) {
+      return alert("Erro: Você não inseriu uma imagem para o prato!");
+    }
+
+    if (tags.length < 1) {
+      return alert("Erro: Adicione pelo menos um ingrediente!")
+    }
+
+    if (newTag) {
+      return alert("Erro: Você deixou um ingrediente no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio.")
+    }
+
+    if (!price) {
+      return alert("Erro: Você não informou o preço do prato!");
+    }
+
+    if (!description) {
+      return alert("Erro: Você não informou uma descrição para o prato!");
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await api.post("/dishes", {
+        name,
+        category,
+        tags,
+        price,
+        description
+      });
+
+      const dishId = String(response.data.id);
+
+      const fileUploadForm = new FormData();
+      fileUploadForm.append("photo", image)
+
+      await api.patch(`/dishes/photo/${dishId}`, fileUploadForm);
+
+      alert("Prato criado com sucesso!");
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Erro ao criar o prato!");
+      }
+    } finally {
+      setLoading(false);
+      navigate("/");
+    }
   }
 
   return (
@@ -55,15 +121,26 @@ export function NewDish() {
                   id="image"
                   accept="image/png, image/jpeg"
                   type="file"
+                  onChange={e => setImage(e.target.files[0])}
                 />
               </div>
             </div>
 
-            <Input id="name" name="Nome" placeholder="Salada Ceasar" />
+            <Input
+              id="name"
+              name="Nome"
+              placeholder="Ex.: Salada Ceasar"
+              onChange={e => setName(e.target.value)}
+            />
 
             <div>
               <label htmlFor="category">Categoria</label>
-              <select id="category">
+              <select
+                id="category"
+                defaultValue={'default'}
+                onChange={e => setCategory(e.target.value)}
+              >
+                <option value="default" disabled>Selecione a categoria</option>
                 <option value="Refeição">Refeição</option>
                 <option value="Pratos principais">Pratos principais</option>
                 <option value="Entrada">Entrada</option>
@@ -100,6 +177,7 @@ export function NewDish() {
               name="Preço"
               placeholder="R$ 00,00"
               min="0"
+              onChange={e => setPrice(e.target.value)}
             />
           </div>
 
@@ -108,10 +186,16 @@ export function NewDish() {
             <Textarea
               id="description"
               placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
+              onChange={e => setDescription(e.target.value)}
             />
           </div>
 
-          <Button type="button" title="Salvar alterações" />
+          <Button
+            type="button"
+            title={loading ? "Salvando alterações..." : "Salvar alterações"}
+            onClick={handleNewDish}
+            disabled={loading}
+          />
 
         </Form>
       </main>
