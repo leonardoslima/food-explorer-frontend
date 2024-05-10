@@ -8,7 +8,7 @@ import { Button } from '../Button'
 import { Input } from '../Input'
 
 
-export function Header({ onOpenMenu }) {
+export function Header({ search, onOpenMenu }) {
   const { signOut, user } = useAuth();
 
   const isAdmin = user?.isAdmin || false;
@@ -35,6 +35,7 @@ export function Header({ onOpenMenu }) {
           <Input
             type="search"
             placeholder="Busque por pratos ou ingredientes"
+            onChange={e => { search(e.target.value) }}
           />
         </div>
 

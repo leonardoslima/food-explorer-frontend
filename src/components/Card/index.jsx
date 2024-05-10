@@ -5,6 +5,7 @@ import { Container } from './styles';
 
 import { Counter } from '../Counter';
 import { Button } from '../Button';
+import { api } from '../../services/api';
 
 export function Card({ dish, isAdmin = false, favorite = false }) {
   return (
@@ -22,12 +23,12 @@ export function Card({ dish, isAdmin = false, favorite = false }) {
       )}
 
       <Link to={"/dish/1"} >
-        <img src={dish.image} alt={dish.name} />
+        <img src={`${api.defaults.baseURL}/files/${dish.photo}`} alt={dish.name} />
         <h3>{dish.name} &gt;</h3>
         <p>{dish.description}</p>
         <span>R$ {dish.price}</span>
       </Link>
-      
+
       {!isAdmin && (
         <div>
           <Counter quantity={2} />

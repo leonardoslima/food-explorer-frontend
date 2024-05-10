@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Container } from "./styles";
 
@@ -8,21 +8,34 @@ import { Footer } from "../../components/Footer";
 import { Section } from "../../components/Section";
 import { MenuMobile } from "../../components/MenuMobile";
 
-import imageDish from '../../assets/ravanello-300.png';
 import foots200 from '../../assets/foots-200.svg';
+import { api } from "../../services/api";
 
 export function Home() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
+  const [dishes, setDishes] = useState([])
+  const [search, setSearch] = useState("")
+
+  const categories = ["Entrada", "Refeição", "Pratos principais"].sort();
+
+  useEffect(() => {
+    async function fetchDishes() {
+      const response = await api.get(`/dishes?search=${search}`);
+      setDishes(response.data);
+      console.log(response.data);
+    }
+    fetchDishes();
+  }, [search])
+
   return (
     <Container>
-
       <MenuMobile
         menuIsOpen={menuIsOpen}
         onCloseMenu={() => setMenuIsOpen(false)}
       />
 
-      <Header onOpenMenu={() => setMenuIsOpen(true)} />
+      <Header search={setSearch} onOpenMenu={() => setMenuIsOpen(true)} />
 
       <main>
         <div>
@@ -36,72 +49,26 @@ export function Home() {
           </div>
         </div>
 
-        <Section
-          title="Refeições"
-          cards={[
-            <Card
-              key={1}
-              dish={{
-                image: imageDish,
-                name: "Torradas de Parma",
-                description: "Presunto de parma e rúcula em um pão com fermentação natural.",
-                price: "25,97"
-              }}
-            />,
-            <Card
-              key={2}
-              dish={{
-                image: imageDish,
-                name: "Torradas de Parma",
-                description: "Presunto de parma e rúcula em um pão com fermentação natural.",
-                price: "25,97"
-              }}
-            />,
-            <Card
-              key={2}
-              dish={{
-                image: imageDish,
-                name: "Torradas de Parma",
-                description: "Presunto de parma e rúcula em um pão com fermentação natural.",
-                price: "25,97"
-              }}
-            />,
-            <Card
-              key={2}
-              dish={{
-                image: imageDish,
-                name: "Torradas de Parma",
-                description: "Presunto de parma e rúcula em um pão com fermentação natural.",
-                price: "25,97"
-              }}
-            />,
-            <Card
-              key={2}
-              dish={{
-                image: imageDish,
-                name: "Torradas de Parma",
-                description: "Presunto de parma e rúcula em um pão com fermentação natural.",
-                price: "25,97"
-              }}
-            />
-          ]}
-        ></Section>
-
-        <Section
-          title="Sobremesas"
-          cards={[
-            <Card
-              key={1}
-              dish={{
-                image: imageDish,
-                name: "Torradas de Parma",
-                description: "Presunto de parma e rúcula em um pão com fermentação natural.",
-                price: "25,97"
-              }}
-            />,
-          ]}
-        ></Section>
-
+        {
+          categories.map(category => (
+            dishes.filter(dish => dish.category === category).length > 0 && (
+              <Section
+                key={category}
+                title={category}
+                cards={dishes.filter(dish => dish.category === category).map((dish, index) => (
+                  <Card
+                    key={index}
+                    dish={{
+                      photo: dish.photo,
+                      name: dish.name,
+                      description: dish.description,
+                      price: dish.price
+                    }}
+                  />
+                ))}
+              />
+            )
+          ))}
       </main>
       <Footer />
     </Container >
