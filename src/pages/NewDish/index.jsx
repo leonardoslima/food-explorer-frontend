@@ -25,6 +25,12 @@ export function NewDish() {
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState("");
 
+  const [image, setImage] = useState(null);
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+
   function handleAddTag() {
     setTags(prevState => [...prevState, newTag])
 
@@ -34,12 +40,6 @@ export function NewDish() {
   function handleRemoveTag(deleted) {
     setTags(prevState => prevState.filter(tag => tag !== deleted))
   }
-
-  const [image, setImage] = useState(null);
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
 
   async function handleNewDish() {
     if (!image) {
@@ -68,7 +68,7 @@ export function NewDish() {
       const response = await api.post("/dishes", {
         name,
         category,
-        tags,
+        ingredients: tags,
         price,
         description
       });
@@ -81,15 +81,16 @@ export function NewDish() {
       await api.patch(`/dishes/photo/${dishId}`, fileUploadForm);
 
       alert("Prato criado com sucesso!");
+
+      navigate("/");
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
+        setLoading(false);
       } else {
         alert("Erro ao criar o prato!");
+        setLoading(false);
       }
-    } finally {
-      setLoading(false);
-      navigate("/");
     }
   }
 

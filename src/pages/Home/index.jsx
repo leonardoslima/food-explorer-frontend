@@ -10,8 +10,13 @@ import { MenuMobile } from "../../components/MenuMobile";
 
 import foots200 from '../../assets/foots-200.svg';
 import { api } from "../../services/api";
+import { useAuth } from "../../hooks/auth";
 
 export function Home() {
+  const { user } = useAuth();
+
+  const isAdmin = user?.isAdmin || false;
+
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const [dishes, setDishes] = useState([])
@@ -23,7 +28,6 @@ export function Home() {
     async function fetchDishes() {
       const response = await api.get(`/dishes?search=${search}`);
       setDishes(response.data);
-      console.log(response.data);
     }
     fetchDishes();
   }, [search])
@@ -58,7 +62,9 @@ export function Home() {
                 cards={dishes.filter(dish => dish.category === category).map((dish, index) => (
                   <Card
                     key={index}
+                    isAdmin={isAdmin}
                     dish={{
+                      id: dish.id,
                       photo: dish.photo,
                       name: dish.name,
                       description: dish.description,

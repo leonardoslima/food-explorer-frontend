@@ -12,7 +12,7 @@ export function Card({ dish, isAdmin = false, favorite = false }) {
     <Container>
       {isAdmin ? (
         <button>
-          <Link to={"/dishEdit/1"} >
+          <Link to={`/dishEdit/${dish.id}`} >
             <PencilSimple size={32} />
           </Link>
         </button>
@@ -22,7 +22,7 @@ export function Card({ dish, isAdmin = false, favorite = false }) {
         </button>
       )}
 
-      <Link to={"/dish/1"} >
+      <Link to={`/dish/${dish.id}`} >
         <img src={`${api.defaults.baseURL}/files/${dish.photo}`} alt={dish.name} />
         <h3>{dish.name} &gt;</h3>
         <p>{dish.description}</p>
