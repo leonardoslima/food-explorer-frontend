@@ -1,17 +1,17 @@
+import { api } from '../../services/api';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { BackButton, Container, FooterButtons, Form, Textarea } from './styles';
 import { CaretLeft, UploadSimple } from '@phosphor-icons/react';
+import { BackButton, Container, FooterButtons, Form, Textarea } from './styles';
 
 import { Input } from '../../components/Input';
+import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { LinkText } from '../../components/LinkText';
 import { MenuMobile } from '../../components/MenuMobile';
 import { AddIngredients } from '../../components/AddIngredients';
-import { Button } from '../../components/Button';
-import { api } from '../../services/api';
 
 export function DishEdit() {
 
@@ -98,8 +98,6 @@ export function DishEdit() {
     if (confirm) {
       await api.delete(`/dishes/${params.id}`)
       navigate("/");
-    } else {
-      return;
     }
   }
 
@@ -115,8 +113,6 @@ export function DishEdit() {
         setTags(tagsNames);
         setPrice(response.data.price);
         setDescription(response.data.description);
-
-        console.log(tags);
       } catch (error) {
         if (error.response) {
           alert(error.response.data.message);
@@ -189,7 +185,7 @@ export function DishEdit() {
             <div>
               <label htmlFor="add">Ingredientes</label>
               <div>
-              {
+                {
                   tags.map((tag, index) => (
                     <AddIngredients
                       key={String(index)}

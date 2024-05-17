@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { api } from '../../services/api';
+import { useAuth } from '../../hooks/auth';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
-import { BackButton, Container, Content } from './styles';
 import { CaretLeft } from '@phosphor-icons/react';
+import { BackButton, Container, Content } from './styles';
 
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
@@ -11,12 +14,48 @@ import { LinkText } from '../../components/LinkText';
 import { MenuMobile } from '../../components/MenuMobile';
 import { Ingredient } from '../../components/Ingredient';
 
-import ravanello300 from '../../assets/ravanello-300.png';
-import ravanello400 from '../../assets/ravanello-400.png';
-import { Link } from 'react-router-dom';
+export function Dish() {
+  const params = useParams();
 
-export function Dish({ $isAdmin = false }) {
+  const { user } = useAuth();
+
+  const isAdmin = user?.isAdmin || false;
+
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+
+  const [data, setData] = useState(null);
+
+  const [quantity, setQuantity] = useState(1);
+
+  function handleIncreaseAmountDish() {
+    setQuantity(prevQuantity => prevQuantity + 1);
+  }
+
+  function handleDecreaseAmountDish() {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    } else {
+      alert('A quantidade não pode ser menor que 1');
+    }
+  }
+
+  useEffect(() => {
+    async function fetchDishId() {
+      try {
+        const response = await api.get(`/dishes/${params.id}`);
+
+        setData(response.data);
+      } catch (error) {
+        if (error.response) {
+          alert(error.response.data.message);
+        } else {
+          alert("Erro ao obter dados.");
+        }
+      }
+    }
+
+    fetchDishId();
+  }, []);
 
   return (
     <Container>
@@ -31,44 +70,58 @@ export function Dish({ $isAdmin = false }) {
         <LinkText name="voltar" icon={<CaretLeft size={32} />} to={-1} />
       </BackButton>
 
-      <main>
-        <Content>
-          <picture>
-            <source
-              media="(max-width: 640px)"
-              srcSet={ravanello300}
-              type="image/png"
-            />
-            <img src={ravanello400} alt="" />
-          </picture>
-
-          <div>
-            <h2>Salada Ravanello</h2>
-            <p>
-              Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.
-              O pão naan dá um toque especial.
-            </p>
-
-            <ul>
-              <Ingredient name="alface" />
-              <Ingredient name="cebola" />
-              <Ingredient name="pã o naan" />
-              <Ingredient name="pepino" />
-              <Ingredient name="rabanete" />
-              <Ingredient name="tomate" />
-            </ul>
+      {
+        data &&
+        <main>
+          <Content>
+            <picture>
+              <source
+                media="(max-width: 640px)"
+                srcSet={`${api.defaults.baseURL}/files/${data.photo}`}
+                type="image/png"
+              />
+              <img src={`${api.defaults.baseURL}/files/${data.photo}`} alt={data.name} />
+            </picture>
 
             <div>
-              {!$isAdmin && <Counter quantity="05" />}
-              <Link to={$isAdmin ? `/dishEdit/1` : ''}>
-                <Button
-                  title={$isAdmin ? 'Editar prato' : 'Incluir ∙ R$ 25,00'}
-                />
-              </Link>
+              <h2>{data.name}</h2>
+              <p>
+                {data.description}
+              </p>
+
+              <ul>
+                {
+                  data.ingredients &&
+
+                  data.ingredients.map(ingredients => (
+                    <Ingredient
+                      key={ingredients.id}
+                      name={ingredients.name}
+                    />
+                  ))
+                }
+
+              </ul>
+
+              <div>
+                {
+                  !isAdmin &&
+                  <Counter
+                    quantity={quantity}
+                    handleIncreaseAmountDish={handleIncreaseAmountDish}
+                    handleDecreaseAmountDish={handleDecreaseAmountDish}
+                  />
+                }
+                <Link to={isAdmin ? `/dishEdit/${params.id}` : ''}>
+                  <Button
+                    title={isAdmin ? 'Editar prato' : `Incluir ∙ R$ ${data.price}`}
+                  />
+                </Link>
+              </div>
             </div>
-          </div>
-        </Content>
-      </main>
+          </Content>
+        </main>
+      }
       <Footer />
     </Container>
   );

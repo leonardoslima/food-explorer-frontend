@@ -1,13 +1,28 @@
-import { Heart, PencilSimple } from '@phosphor-icons/react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Heart, PencilSimple } from '@phosphor-icons/react';
 
 import { Container } from './styles';
 
-import { Counter } from '../Counter';
 import { Button } from '../Button';
+import { Counter } from '../Counter';
 import { api } from '../../services/api';
 
 export function Card({ dish, isAdmin = false, favorite = false }) {
+  const [quantity, setQuantity] = useState(1);
+
+  function handleIncreaseAmountDish() {
+    setQuantity(prevQuantity => prevQuantity + 1);
+  }
+
+  function handleDecreaseAmountDish() {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    } else {
+      alert('A quantidade não pode ser menor que 1');
+    }
+  }
+
   return (
     <Container>
       {isAdmin ? (
@@ -31,7 +46,11 @@ export function Card({ dish, isAdmin = false, favorite = false }) {
 
       {!isAdmin && (
         <div>
-          <Counter quantity={2} />
+          <Counter
+            quantity={quantity}
+            handleIncreaseAmountDish={handleIncreaseAmountDish}
+            handleDecreaseAmountDish={handleDecreaseAmountDish}
+          />
           <Button title="incluir" />
         </div>
       )}

@@ -43,6 +43,11 @@ export const Content = styled.div`
 
   > picture {
     margin: 0 auto;
+    max-width: 390px;
+
+    > img{
+      width: 100%;
+    }
   }
 
   > div {
