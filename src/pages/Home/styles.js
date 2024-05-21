@@ -65,7 +65,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 425px) {
+  @media (max-width: 426px) {
     > main > div:first-child {
       justify-content: center;
       align-items: center;

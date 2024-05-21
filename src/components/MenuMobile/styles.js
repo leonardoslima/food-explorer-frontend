@@ -5,13 +5,12 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.COLORS.DARK[400]};
   width: 100%;
   height: 100vh;
-  overflow-y: scroll;
 
   display: flex;
   flex-direction: column;
 
   position: absolute;
-  z-index: 1;
+  z-index: 1000;
   overflow-y: hidden;
 
   transform: translateX(-100%);
@@ -56,6 +55,23 @@ export const Nav = styled.nav`
     font-size: 1.5rem;
 
     border-bottom: 1px solid ${({ theme }) => theme.COLORS.DARK[1000]};
+  }
+
+  #search {
+    background-color: ${({ theme }) => theme.COLORS.DARK[900]};
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding-left: 1.2rem;
+    > div {
+      width: 100%;
+      > label {
+        display: none;
+      }
+      > input:focus {
+        outline: none;
+      }
+    }
   }
 `;
 

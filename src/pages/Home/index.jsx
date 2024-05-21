@@ -37,9 +37,13 @@ export function Home() {
       <MenuMobile
         menuIsOpen={menuIsOpen}
         onCloseMenu={() => setMenuIsOpen(false)}
+        search={setSearch}
       />
 
-      <Header search={setSearch} onOpenMenu={() => setMenuIsOpen(true)} />
+      <Header
+        onOpenMenu={() => setMenuIsOpen(true)}
+        search={setSearch}
+      />
 
       <main>
         <div>
